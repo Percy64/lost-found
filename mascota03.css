@@ -1,0 +1,381 @@
+    /* mascota.css */
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #fdf6ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .registro-mascota {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+        width: 90%;
+    }
+
+    .logo {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .foto-mascota {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-foto {
+        background-color: #c9a7f5;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+    }
+
+    .formulario {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        align-items: center;
+    }
+
+    .formulario div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    input,select {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        width: 90%;
+        box-sizing: border-box;
+    }
+
+    output {
+        color: #e74c3c;
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 0.25rem;
+        width: 90%;
+    }
+
+    .btn_enviar {
+    display: block;       /* Hace que tome todo el ancho disponible como bloque */
+    margin: 1.5rem auto 0 auto; /* Centra horizontalmente y deja margen arriba */
+    background-color: #c9a7f5;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    width: 90%;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+
+    .btn_enviar:hover {
+        background-color: #b896e8;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 1rem;
+        width: 90%;
+    }
+
+    .login-link p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .login-link a {
+        color: #c9a7f5;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .login-link a:hover {
+        color: #b896e8;
+        text-decoration: underline;
+    }
+
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        .registro-mascota {
+            padding: 1rem;
+        }
+
+        .btn-foto,
+        .btn-enviar {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+        }
+    }
+
+    /* Estilos para perfil de mascota */
+    .perfil-mascota {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .titulo-perfil {
+        text-align: center;
+        color: #c9a7f5;
+        font-size: 2.2rem;
+        margin: 0 0 1rem 0;
+        font-weight: bold;
+    }
+
+    .foto-perfil {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .imagen-mascota {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #c9a7f5;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .placeholder-foto {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 4px solid #c9a7f5;
+        color: #999;
+    }
+
+    .placeholder-foto span {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .placeholder-foto p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .nombre-mascota {
+        text-align: center;
+        color: #333;
+        font-size: 1.8rem;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .descripcion-section, .info-mascota, .info-dueño, .historial-medico, .qr-section {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid #c9a7f5;
+    }
+
+    .descripcion-section h3, .info-mascota h3, .info-dueño h3, .historial-medico h3, .qr-section h3 {
+        margin: 0 0 1rem 0;
+        color: #c9a7f5;
+        font-size: 1.3rem;
+    }
+
+    .descripcion-texto {
+        margin: 0;
+        line-height: 1.6;
+        color: #555;
+        text-align: justify;
+    }
+
+    .info-grid {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        font-weight: bold;
+        color: #666;
+    }
+
+    .info-value {
+        color: #333;
+        text-align: right;
+    }
+
+    .info-value a {
+        color: #c9a7f5;
+        text-decoration: none;
+    }
+
+    .info-value a:hover {
+        text-decoration: underline;
+    }
+
+    .acciones {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .btn-accion {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 1;
+        max-width: 200px;
+    }
+
+    .btn-contactar {
+        background-color: #c9a7f5;
+        color: white;
+    }
+
+    .btn-contactar:hover {
+        background-color: #b896e8;
+        transform: translateY(-2px);
+    }
+
+    .btn-volver {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-volver:hover {
+        background-color: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    /* Estilos para historial médico */
+    .historial-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .historial-item {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 3px solid #c9a7f5;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .historial-fecha {
+        font-weight: bold;
+        color: #c9a7f5;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .historial-descripcion {
+        color: #333;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .historial-veterinario {
+        color: #666;
+        font-size: 0.85rem;
+        font-style: italic;
+    }
+
+    /* Estilos para código QR */
+    .qr-info {
+        margin: 0 0 1rem 0;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .qr-code {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 0.8rem;
+        word-break: break-all;
+        border: 2px dashed #c9a7f5;
+        text-align: center;
+        color: #333;
+    }
+
+    /* Responsive para perfil */
+    @media (max-width: 480px) {
+        .imagen-mascota, .placeholder-foto {
+            width: 150px;
+            height: 150px;
+        }
+
+        .nombre-mascota {
+            font-size: 1.5rem;
+        }
+
+        .acciones {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn-accion {
+            max-width: none;
+        }
+    }
