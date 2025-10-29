@@ -1,5 +1,62 @@
 /* Estilos adicionales para registro de mascota */
 
+/* Header del formulario */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-header h2 {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+/* Botón de flecha para volver atrás */
+.btn-back-arrow {
+    background-color: #c9a7f5;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(201, 167, 245, 0.3);
+}
+
+.btn-back-arrow:hover {
+    background-color: #b995f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 167, 245, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .btn-back-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-back-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+}
+
+/* Resto de estilos existentes... */
+
 /* Aplicar el mismo fondo que las otras vistas */
 body {
     background: #FAF3B5 !important;

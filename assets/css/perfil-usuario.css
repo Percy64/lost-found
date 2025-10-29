@@ -1,0 +1,641 @@
+/* Estilos específicos para perfil_usuario.php */
+
+/* Header del perfil */
+.perfil-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.perfil-title-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.perfil-title-header h2 {
+    margin: 0;
+    text-align: center;
+    flex: 1;
+}
+
+/* Botón de flecha para volver atrás */
+.btn-back-arrow {
+    background-color: #c9a7f5;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(201, 167, 245, 0.3);
+}
+
+.btn-back-arrow:hover {
+    background-color: #b995f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 167, 245, 0.4);
+}
+
+/* Avatar en el header */
+.user-avatar-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.avatar-img-header {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    object-fit: cover;
+    border: 3px solid #c9a7f5;
+    box-shadow: 0 3px 10px rgba(201, 167, 245, 0.3);
+}
+
+.avatar-placeholder-header {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    border: 3px solid #c9a7f5;
+    box-shadow: 0 3px 10px rgba(201, 167, 245, 0.3);
+}
+
+/* Barra de navegación inferior (copiada de home.css) */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #9B44CE;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0 30px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(155, 68, 206, 0.4);
+    max-width: 90%;
+}
+
+.nav-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.nav-btn svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+    stroke-width: 2;
+}
+
+/* Wrapper de contenido para dejar espacio para la barra inferior */
+.registro-mascota {
+    padding-bottom: 90px;
+}
+
+/* Información del usuario */
+.user-info {
+    background: white;
+    border-radius: 15px;
+    padding: 25px 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Detalles del usuario centrados */
+.user-details-center {
+    width: 100%;
+}
+
+.user-details-center h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.user-email {
+    color: #666;
+    font-size: 18px;
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+.user-phone,
+.user-address {
+    color: #888;
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.user-since {
+    color: #999;
+    font-size: 14px;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* Sección de editar perfil */
+.edit-profile-section {
+    margin-top: 20px;
+}
+
+.btn-edit-profile {
+    background-color: #c9a7f5;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(201, 167, 245, 0.3);
+}
+
+.btn-edit-profile:hover {
+    background-color: #b995f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 167, 245, 0.4);
+}
+
+/* Sección de mascotas */
+.mascotas-section {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.btn-add-pet {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-pet:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Estado sin mascotas */
+.no-pets {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.no-pets p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+/* Grid de mascotas */
+.pets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.pet-card-profile {
+    background: #f9f9f9;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pet-card-profile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    border-color: #c9a7f5;
+}
+
+.pet-image-container {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+}
+
+.pet-image-profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+}
+
+.pet-info {
+    padding: 15px;
+}
+
+.pet-info h4 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.pet-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.pet-breed {
+    color: #888 !important;
+    font-style: italic;
+}
+
+.pet-age,
+.pet-color {
+    color: #666 !important;
+    font-size: 12px;
+    margin: 3px 0;
+}
+
+.pet-actions {
+    margin-top: 15px;
+}
+
+.btn-view {
+    background-color: #c9a7f5;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-view:hover {
+    background-color: #b995f0;
+    transform: translateY(-2px);
+}
+
+/* Sección de logout al final */
+.logout-section {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.btn-logout-bottom {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+    min-width: 160px;
+}
+
+.btn-logout-bottom:hover {
+    background-color: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* Estilos para el formulario de edición */
+.edit-form {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form .campo {
+    margin-bottom: 20px;
+}
+
+.edit-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="email"],
+.edit-form input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.edit-form input[type="text"]:focus,
+.edit-form input[type="email"]:focus,
+.edit-form input[type="tel"]:focus {
+    outline: none;
+    border-color: #c9a7f5;
+}
+
+.edit-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #c9a7f5;
+    border-radius: 10px;
+    background-color: #fafafa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.edit-form input[type="file"]:hover {
+    border-color: #b995f0;
+    background-color: #f5f5f5;
+}
+
+.file-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.error-text {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.success-message {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 4px solid #4caf50;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn-cancel {
+    background-color: #9e9e9e;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.btn-cancel:hover {
+    background-color: #757575;
+    transform: translateY(-2px);
+}
+
+/* Enlace de regreso */
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Error message */
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 4px solid #f44336;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .user-info {
+        padding: 20px 15px;
+    }
+    
+    .avatar-img-header,
+    .avatar-placeholder-header {
+        width: 90px;
+        height: 90px;
+        border-width: 3px;
+        border-radius: 12px;
+    }
+    
+    .avatar-placeholder-header {
+        font-size: 35px;
+    }
+    
+    .user-details-center h3 {
+        font-size: 22px;
+    }
+    
+    .user-email {
+        font-size: 16px;
+    }
+    
+    .user-phone,
+    .user-address {
+        font-size: 14px;
+    }
+    
+    .perfil-title-header {
+        margin-bottom: 15px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .perfil-title-header h2 {
+        font-size: 22px;
+    }
+    
+    .btn-back-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .nav-btn-logout {
+        width: auto;
+        min-width: 120px;
+    }
+    
+    .btn-logout-bottom {
+        padding: 10px 25px;
+        font-size: 15px;
+        min-width: 140px;
+    }
+    
+    .edit-form {
+        padding: 20px;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-cancel {
+        width: 100%;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .btn-add-pet {
+        width: 100%;
+    }
+    
+    .pets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-nav {
+        gap: 15px;
+        padding: 0 20px;
+    }
+    
+    .nav-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario {
+        padding: 15px;
+    }
+    
+    .user-info {
+        padding: 15px;
+    }
+    
+    .mascotas-section {
+        padding: 15px;
+    }
+    
+    .avatar-img-header,
+    .avatar-placeholder-header {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+    }
+    
+    .avatar-placeholder-header {
+        font-size: 30px;
+    }
+    
+    .user-details-center h3 {
+        font-size: 20px;
+    }
+
+    .perfil-title-header h2 {
+        font-size: 20px;
+    }
+    
+    .btn-back-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .btn-logout-bottom {
+        padding: 10px 20px;
+        font-size: 14px;
+        min-width: 120px;
+    }
+    
+    .edit-form {
+        padding: 15px;
+    }
+    
+    .edit-form input[type="text"],
+    .edit-form input[type="email"],
+    .edit-form input[type="tel"] {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .bottom-nav {
+        gap: 10px;
+        padding: 0 15px;
+        height: 55px;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .nav-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+}

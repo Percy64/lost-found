@@ -85,7 +85,7 @@ CREATE TABLE `mascotas` (
   `id` int(11) NOT NULL,
   `id_qr` int(11) DEFAULT NULL,
   `foto_url` varchar(255) DEFAULT NULL,
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_mascota`),
   UNIQUE KEY `id_qr` (`id_qr`),
   KEY `id_dueño` (`id`),

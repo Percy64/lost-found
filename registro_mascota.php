@@ -1,12 +1,26 @@
 <?php
+session_start();
 require 'conexion.php';
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: iniciosesion.php');
+    exit;
+}
+
+$usuario_id = $_SESSION['usuario_id'];
+
 $nombre='';
 $especie='';
-$fecha_nacimiento='';
+$edad='';
+$raza='';
+$color='';
 ////////////////////////////
 $msg_nombre='';
 $msg_especie='';
-$msg_fecha_nacimiento='';
+$msg_edad='';
+$msg_raza='';
+$msg_color='';
 ////////////////////////////
 
 $error=false;
@@ -18,15 +32,16 @@ if(isset($_POST['btn_enviar'])){
         if(empty($nombre)){
             $msg_nombre='No puede estar vacio';
             $error=true;
-        }elseif(strlen($nombre) < 3 || strlen($nombre) > 12){
-            $msg_nombre='Debe tener entre 3 y 12 caracteres';
+        }elseif(strlen($nombre) < 2 || strlen($nombre) > 50){
+            $msg_nombre='Debe tener entre 2 y 50 caracteres';
             $error=true;
         }
     }else{
         $msg_nombre='Ingrese nombre';
+        $error=true;
     }
 
-    // AGREGAR VALIDACIÓN Y ASIGNACIÓN DE ESPECIE
+    // VALIDACIÓN DE ESPECIE
     if(isset($_POST['especie'])){
         $especie=trim($_POST['especie']);
         if(empty($especie)){
@@ -38,20 +53,43 @@ if(isset($_POST['btn_enviar'])){
         $error=true;
     }
 
-    if(isset($_POST['fecha_nacimiento'])){
-        $fecha_nacimiento=trim($_POST['fecha_nacimiento']);
-        if(empty($fecha_nacimiento)){
-            $msg_fecha_nacimiento='No puede estar vacio';
+    // VALIDACIÓN DE EDAD
+    if(isset($_POST['edad'])){
+        $edad=trim($_POST['edad']);
+        if(empty($edad)){
+            $msg_edad='Ingrese la edad';
+            $error=true;
+        }elseif(!is_numeric($edad) || $edad < 0 || $edad > 30){
+            $msg_edad='La edad debe ser un número entre 0 y 30';
             $error=true;
         }
     }else{
-        $msg_fecha_nacimiento='Ingrese fecha de nacimiento';
+        $msg_edad='Ingrese la edad';
+        $error=true;
+    }
+
+    // VALIDACIÓN DE RAZA (opcional)
+    if(isset($_POST['raza'])){
+        $raza=trim($_POST['raza']);
+        if(strlen($raza) > 100){
+            $msg_raza='La raza no puede tener más de 100 caracteres';
+            $error=true;
+        }
+    }
+
+    // VALIDACIÓN DE COLOR (opcional)
+    if(isset($_POST['color'])){
+        $color=trim($_POST['color']);
+        if(strlen($color) > 50){
+            $msg_color='El color no puede tener más de 50 caracteres';
+            $error=true;
+        }
     }
 
     if (!$error) {
         try {
             // Procesar la imagen
-            $foto = null;
+            $foto_path = null;
             if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
                 $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
                 $max_size = 5 * 1024 * 1024; // 5MB
@@ -63,21 +101,50 @@ if(isset($_POST['btn_enviar'])){
                     $msg_general = 'La imagen es demasiado grande. Máximo 5MB.';
                     $error = true;
                 } else {
-                    $foto = file_get_contents($_FILES['foto']['tmp_name']);
+                    // Crear directorio si no existe
+                    $upload_dir = 'assets/images/mascotas/';
+                    if (!file_exists($upload_dir)) {
+                        mkdir($upload_dir, 0777, true);
+                    }
+                    
+                    // Generar nombre único
+                    $extension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+                    $filename = 'mascota_' . $usuario_id . '_' . time() . '.' . $extension;
+                    $foto_path = $upload_dir . $filename;
+                    
+                    if (!move_uploaded_file($_FILES['foto']['tmp_name'], $foto_path)) {
+                        $msg_general = 'Error al guardar la imagen.';
+                        $error = true;
+                        $foto_path = null;
+                    }
                 }
             }
 
             if (!$error) {
-                $sql = "INSERT INTO mascotas (nombre, especie, fecha_nacimiento, sexo, foto) VALUES (?, ?, ?, ?, ?)";
+                // Insertar en la base de datos con los campos correctos
+                $sql = "INSERT INTO mascotas (nombre, especie, edad, raza, color, sexo, id, foto_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([$nombre, $especie, $fecha_nacimiento, $_POST['sexo'], $foto]);
+                $result = $stmt->execute([
+                    $nombre, 
+                    $especie, 
+                    (int)$edad, 
+                    !empty($raza) ? $raza : null, 
+                    !empty($color) ? $color : null, 
+                    $_POST['sexo'], 
+                    $usuario_id, 
+                    $foto_path
+                ]);
                 
-                $success_message = "Mascota registrada exitosamente.";
-                // Limpiar variables
-                $nombre = $especie = $fecha_nacimiento = '';
+                if ($result) {
+                    $success_message = "Mascota registrada exitosamente.";
+                    // Limpiar variables
+                    $nombre = $especie = $edad = $raza = $color = '';
+                } else {
+                    $msg_general = 'Error al registrar la mascota en la base de datos.';
+                }
             }
         } catch(PDOException $e) {
-            $msg_general = 'Error al registrar la mascota. Inténtelo nuevamente.';
+            $msg_general = 'Error al registrar la mascota: ' . $e->getMessage();
             $error = true;
         }
     }
@@ -96,10 +163,15 @@ if(isset($_POST['btn_enviar'])){
 </head>
 <body>
   <section class="registro-mascota">
-    
-
     <form class="formulario" method="post" action="" enctype="multipart/form-data">
-      <h2>INGRESAR MASCOTA</h2>
+      <!-- Header con flecha de regreso -->
+      <div class="form-header">
+        <button type="button" onclick="window.location.href='perfil_usuario.php'" class="btn-back-arrow">
+          ← 
+        </button>
+        <h2>INGRESAR MASCOTA</h2>
+        <div></div> <!-- Spacer -->
+      </div>
 
       <?php if(isset($success_message)): ?>
         <div class="success-message">
@@ -136,8 +208,14 @@ if(isset($_POST['btn_enviar'])){
       </select>
       <output class="msg_especie"><?=$msg_especie?></output>
 
-      <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" value="<?=$fecha_nacimiento?>" />
-      <output class="msg_fecha_nacimiento"><?=$msg_fecha_nacimiento?></output>
+      <input type="number" name="edad" placeholder="Edad (años)" value="<?=$edad?>" min="0" max="30" />
+      <output class="msg_edad"><?=$msg_edad?></output>
+
+      <input type="text" name="raza" placeholder="Raza (opcional)" value="<?=$raza?>" />
+      <output class="msg_raza"><?=$msg_raza?></output>
+
+      <input type="text" name="color" placeholder="Color (opcional)" value="<?=$color?>" />
+      <output class="msg_color"><?=$msg_color?></output>
       
       <select name="sexo" required>
         <option value="" disabled selected>Sexo</option>
