@@ -49,16 +49,38 @@ if(isset($_POST['btn_enviar'])){
     }
 
     if (!$error) {
-    // Procesar la imagen
-    $foto = null;
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
-        $foto = file_get_contents($_FILES['foto']['tmp_name']);
-    }
+        try {
+            // Procesar la imagen
+            $foto = null;
+            if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
+                $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+                $max_size = 5 * 1024 * 1024; // 5MB
+                
+                if(!in_array($_FILES['foto']['type'], $allowed_types)){
+                    $msg_general = 'Formato de imagen no permitido. Use JPG, PNG, GIF o WEBP.';
+                    $error = true;
+                } elseif($_FILES['foto']['size'] > $max_size){
+                    $msg_general = 'La imagen es demasiado grande. Máximo 5MB.';
+                    $error = true;
+                } else {
+                    $foto = file_get_contents($_FILES['foto']['tmp_name']);
+                }
+            }
 
-    $sql = "INSERT INTO mascotas (nombre, especie, fecha_nacimiento, sexo, foto) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$nombre, $especie, $fecha_nacimiento, $_POST['sexo'], $foto]);
-}
+            if (!$error) {
+                $sql = "INSERT INTO mascotas (nombre, especie, fecha_nacimiento, sexo, foto) VALUES (?, ?, ?, ?, ?)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$nombre, $especie, $fecha_nacimiento, $_POST['sexo'], $foto]);
+                
+                $success_message = "Mascota registrada exitosamente.";
+                // Limpiar variables
+                $nombre = $especie = $fecha_nacimiento = '';
+            }
+        } catch(PDOException $e) {
+            $msg_general = 'Error al registrar la mascota. Inténtelo nuevamente.';
+            $error = true;
+        }
+    }
 }
 
 
@@ -69,24 +91,39 @@ if(isset($_POST['btn_enviar'])){
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registro de Mascota</title>
-  <link rel="stylesheet" href="mascota03.css" />
+  <link rel="stylesheet" href="assets/css/mascota03.css" />
+  <link rel="stylesheet" href="assets/css/registro-mascota-addon.css" />
 </head>
 <body>
   <section class="registro-mascota">
     
 
     <form class="formulario" method="post" action="" enctype="multipart/form-data">
-      <h2>Ingresar mascota</h2>
+      <h2>INGRESAR MASCOTA</h2>
+
+      <?php if(isset($success_message)): ?>
+        <div class="success-message">
+          <?= htmlspecialchars($success_message) ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if(isset($msg_general) && !empty($msg_general)): ?>
+        <div class="error-message">
+          <?= htmlspecialchars($msg_general) ?>
+        </div>
+      <?php endif; ?>
 
       <div class="foto-mascota">
       <!-- Input oculto para cargar imagen -->
-      <input type="file" id="input-foto" name="foto" accept="image/*" style="display: none;" />
+      <input type="file" id="input-foto" name="foto" accept="image/*" class="input-foto-hidden" />
 
       <!-- Botón que abre el selector -->
-      <button type="button" class="btn-foto" id="btn-foto" onclick="document.getElementById('input-foto').click()">+</button>
+      <button type="button" class="btn-foto" id="btn-foto" onclick="document.getElementById('input-foto').click()">
+        📷 Seleccionar foto
+      </button>
 
       <!-- Vista previa -->
-      <img id="preview-foto" src="" alt="Vista previa" style="margin-top: 1rem; display: none; width: 120px; height: 120px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />
+      <img id="preview-foto" src="" alt="Vista previa" class="preview-foto" />
       </div>
 
       <input type="text" name="nombre" placeholder="Nombre" value="<?=$nombre?>" />
@@ -108,7 +145,7 @@ if(isset($_POST['btn_enviar'])){
         <option value="hembra">Hembra</option>
       </select>
 
-      <button type="submit" name="btn_enviar" class="btn_enviar">+</button>
+      <button type="submit" name="btn_enviar" class="btn_enviar">Registrar mascota</button>
     </form>
   </section>
 

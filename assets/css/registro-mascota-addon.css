@@ -1,0 +1,84 @@
+/* Estilos adicionales para registro de mascota */
+
+/* Aplicar el mismo fondo que las otras vistas */
+body {
+    background: #FAF3B5 !important;
+}
+
+.registro-mascota {
+    background: #FAF3B5 !important;
+}
+
+/* Hacer el formulario con fondo blanco */
+.formulario {
+    background: white !important;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.input-foto-hidden {
+    display: none;
+}
+
+.preview-foto {
+    margin-top: 1rem;
+    display: none;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Hacer que el botón de foto tenga el mismo ancho que los inputs */
+.btn-foto {
+    width: 90% !important;
+    height: 60px !important;
+    border-radius: 8px !important;
+    font-size: 2rem;
+    background-color: #c9a7f5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.btn-foto:hover {
+    background-color: #b491e8;
+}
+
+.foto-mascota {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Estilos para mensajes */
+.success-message {
+    background-color: #d1f2eb;
+    border: 1px solid #52c41a;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: #389e0d;
+    text-align: center;
+    width: 90%;
+}
+
+.error-message {
+    background-color: #ffeaa7;
+    border: 1px solid #fdcb6e;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: #e17055;
+    text-align: center;
+    width: 90%;
+}

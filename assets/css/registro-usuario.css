@@ -1,0 +1,80 @@
+/* Estilos adicionales para registro de usuario */
+
+/* Aplicar exactamente el mismo fondo que iniciosesion.php */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #FAF3B5 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.registro-mascota {
+    background: #FAF3B5 !important;
+}
+
+/* Hacer el formulario con fondo blanco */
+.formulario {
+    background: white !important;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.login-link p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.login-link a {
+    color: #FF6B35;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes para mantener consistencia visual */
+.formulario div {
+    margin-bottom: 1rem;
+}
+
+.formulario input {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.formulario input:focus {
+    outline: none;
+    border-color: #c9a7f5;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(201, 167, 245, 0.1);
+}
+
+.formulario output {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* Estilo para mensaje de éxito */
+.success-message {
+    background-color: #d1f2eb;
+    border: 1px solid #52c41a;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: #389e0d;
+    text-align: center;
+}

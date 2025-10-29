@@ -1,0 +1,168 @@
+/* Estilos para la página de perfil de mascota (nousuario) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #FAF3B5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    background-color: #FAF3B5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.content {
+    padding: 24px;
+}
+
+.image-container {
+    width: 100%;
+    height: 280px;
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #9B44CE;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.location svg {
+    width: 20px;
+    height: 20px;
+}
+
+.description {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #9B44CE;
+    color: white;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(155, 68, 206, 0.2);
+}
+
+.btn:hover {
+    background-color: #8B38B8;
+}
+
+.btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-container {
+    background-color: #9B44CE;
+    border-radius: 50px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(155, 68, 206, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.footer-container:hover {
+    background-color: #8B38B8;
+}
+
+.icon-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.icon-btn svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.contact-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contact-info .primary {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.contact-info .secondary {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}

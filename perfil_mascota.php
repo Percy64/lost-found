@@ -48,7 +48,7 @@ $historial = $stmt_historial->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de <?= htmlspecialchars($mascota['nombre']) ?></title>
-    <link rel="stylesheet" href="mascota03.css" />
+    <link rel="stylesheet" href="assets/css/mascota03.css" />
 </head>
 <body>
     <section class="registro-mascota">
