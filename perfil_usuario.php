@@ -29,7 +29,8 @@ try {
 $mascotas = [];
 $debug_sql = '';
 try {
-    $sql_mascotas = "SELECT * FROM mascotas WHERE id = ? ORDER BY fecha_creacion DESC";
+    // Corregido: la columna de fecha en la tabla es 'fecha_registro' (no 'fecha_creacion')
+    $sql_mascotas = "SELECT * FROM mascotas WHERE id = ? ORDER BY fecha_registro DESC";
     $debug_sql = "SQL: " . $sql_mascotas . " con parametro: " . $usuario_id;
     $stmt_mascotas = $pdo->prepare($sql_mascotas);
     $stmt_mascotas->execute([$usuario_id]);
@@ -107,46 +108,7 @@ try {
                     <button onclick="window.location.href='registro_mascota.php'" class="btn-add-pet">➕ Agregar</button>
                 </div>
 
-                <!-- Debug info (temporal) -->
-                <?php if(isset($_GET['debug'])): ?>
-                    <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-size: 12px; border-radius: 5px;">
-                        <strong>🔍 Debug Info:</strong><br>
-                        Usuario ID: <?= $usuario_id ?><br>
-                        Usuario logueado: <?= isset($_SESSION['usuario_id']) ? 'Sí' : 'No' ?><br>
-                        Sesión ID: <?= $_SESSION['usuario_id'] ?? 'No definido' ?><br>
-                        <?= $debug_sql ?? '' ?><br>
-                        <?php if(isset($debug_error)): ?>
-                            <span style="color: red;">Error: <?= $debug_error ?></span><br>
-                        <?php endif; ?>
-                        Número de mascotas: <?= count($mascotas) ?><br>
-                        <?php if(!empty($mascotas)): ?>
-                            <strong>Mascotas encontradas:</strong><br>
-                            <?php foreach($mascotas as $i => $m): ?>
-                                <?= $i+1 ?>. <?= htmlspecialchars($m['nombre']) ?> 
-                                (<?= htmlspecialchars($m['especie']) ?>)
-                                - ID: <?= $m['id_mascota'] ?>
-                                - Owner ID: <?= $m['id'] ?>
-                                <?php if(!empty($m['foto_url'])): ?>
-                                    - Foto: <?= htmlspecialchars($m['foto_url']) ?>
-                                    <?php if(file_exists($m['foto_url'])): ?>
-                                        ✅
-                                    <?php else: ?>
-                                        ❌ (archivo no existe)
-                                    <?php endif; ?>
-                                <?php else: ?>
-                                    - Sin foto
-                                <?php endif; ?>
-                                <br>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <span style="color: orange;">No se encontraron mascotas para este usuario.</span><br>
-                        <?php endif; ?>
-                        
-                        <br><strong>📊 Verificación manual:</strong><br>
-                        <em>Ejecutar en phpMyAdmin:</em><br>
-                        <code style="background: #fff; padding: 2px;">SELECT * FROM mascotas WHERE id = <?= $usuario_id ?>;</code>
-                    </div>
-                <?php endif; ?>
+                
 
                 <?php if (empty($mascotas)): ?>
                     <div class="no-pets">

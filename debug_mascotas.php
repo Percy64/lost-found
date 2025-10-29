@@ -88,7 +88,8 @@ try {
 // Consulta específica para el usuario
 echo "<h3>5. Mascotas del Usuario Actual:</h3>";
 try {
-    $sql = "SELECT * FROM mascotas WHERE id = ? ORDER BY fecha_creacion DESC";
+    // Corregido: la columna de fecha es 'fecha_registro'
+    $sql = "SELECT * FROM mascotas WHERE id = ? ORDER BY fecha_registro DESC";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$usuario_id]);
     $mascotas_usuario = $stmt->fetchAll(PDO::FETCH_ASSOC);
