@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'conexion.php';
+require_once 'includes/QRGenerator.php';
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuario_id'])) {
@@ -136,7 +137,23 @@ if(isset($_POST['btn_enviar'])){
                 ]);
                 
                 if ($result) {
-                    $success_message = "Mascota registrada exitosamente.";
+                    $mascota_id = $pdo->lastInsertId();
+                    
+                    // 🔥 GENERAR CÓDIGO QR AUTOMÁTICAMENTE
+                    $qrGenerator = new QRGenerator();
+                    $qr_result = $qrGenerator->generarQRMascota($mascota_id, [
+                        'nombre' => $nombre,
+                        'especie' => $especie
+                    ]);
+                    
+                    // Actualizar el QR en la base de datos
+                    if ($qr_result['success']) {
+                        $qrGenerator->actualizarQREnBD($pdo, $mascota_id, $qr_result);
+                        $success_message = "Mascota registrada exitosamente con código QR generado.";
+                    } else {
+                        $success_message = "Mascota registrada exitosamente. (Error al generar QR: " . $qr_result['error'] . ")";
+                    }
+                    
                     // Limpiar variables
                     $nombre = $especie = $edad = $raza = $color = '';
                 } else {

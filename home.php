@@ -71,7 +71,7 @@
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
         </button>
-        <button class="nav-btn" onclick="alert('Buscar')">
+        <button class="nav-btn" onclick="window.location.href='busqueda.php'">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>

@@ -1,0 +1,241 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdf6ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.contenedor-principal {
+  width: 100%;
+  max-width: 720px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.busqueda-mascota {
+  width: 100%;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.barra-busqueda {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.barra-busqueda input {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.btn-buscar {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.btn-camara {
+  background-color: #c9a7f5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #c62828;
+}
+
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.card-mascota {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-mascota:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.barra-navegacion button.active {
+  background-color: #c9a7f5;
+  color: white;
+  border-radius: 50%;
+}
+
+#mapa {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 1rem;
+  font-style: italic;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* --- Carrusel con flechas --- */
+.carrusel-con-flechas {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carrusel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.5rem 0;
+}
+
+.carrusel::-webkit-scrollbar {
+  display: none;
+}
+
+.carrusel .card-mascota {
+  min-width: 220px;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.carrusel .card-mascota img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.carrusel .card-mascota p,
+.carrusel .card-mascota span {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Flechas minimalistas */
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.05);
+  border: none;
+  font-size: 2rem;
+  color: #555;
+  padding: 0.4rem 0.6rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.3s ease, background 0.3s ease;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carrusel-con-flechas:hover .flecha {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.flecha.izquierda {
+  left: -0.5rem;
+}
+
+.flecha.derecha {
+  right: -0.5rem;
+}
+
+/* Barra de navegación */
+.barra-navegacion {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+  border-top: 1px solid #ddd;
+  padding-top: 0.5rem;
+}
+
+.barra-navegacion button {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .contenedor-principal {
+    padding: 0.5rem;
+  }
+
+  .busqueda-mascota {
+    padding: 1rem;
+  }
+
+  .btn-camara {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .carrusel .card-mascota {
+    min-width: 180px;
+  }
+
+  #mapa {
+    height: 220px;
+  }
+
+  .flecha {
+    display: none;
+  }
+}

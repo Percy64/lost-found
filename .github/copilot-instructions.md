@@ -1,38 +1,43 @@
 # Lost & Found Pet Management System - AI Instructions
 
 ## Project Overview
-This is a PHP-based web application for managing lost and found pets, built for XAMPP/WAMP local development. The system uses a MySQL database with PDO connections and follows a simple MVC-like pattern with direct SQL queries.
+This is a PHP-based web application for managing lost and found pets, built for XAMPP/WAMP local development. The system uses a MySQL database with PDO connections and follows a simple MVC-like pattern with direct SQL queries. **Full authentication system is now implemented** with session management.
 
 ## Database Architecture
 - **Primary Database**: `mascotas_db` with MySQL/MariaDB
 - **Connection Pattern**: All PHP files use `require 'conexion.php'` for PDO connection
 - **Key Tables**:
-  - `usuarios` - User accounts with hashed passwords
-  - `mascotas` - Pet records linked to users via foreign key `id`
+  - `usuarios` - User accounts with hashed passwords and profile photos
+  - `mascotas` - Pet records linked to users via foreign key `id` (references usuarios.id)
   - `codigos_qr` - QR codes for pet identification (unique codes)
   - `historial_medico` - Medical history linked to pets
-  - `fotos_mascotas` - Pet photos (currently unused, photos stored as BLOB in mascotas table)
+  - `fotos_mascotas` - Legacy table (photos now stored as files with `foto_url` field)
 
 ## File Structure & Patterns
 ```
 ├── conexion.php          # PDO database connection (localhost, root, no password)
-├── home.php             # Main feed with hardcoded pet data array
-├── iniciosesion.php     # Login form (UI only, no backend auth)
-├── registro_usuario.php # User registration with validation
-├── registro_mascota.php # Pet registration with image upload
+├── home.php             # Main feed with session checks and hardcoded pet data
+├── iniciosesion.php     # Login form with full authentication backend
+├── logout.php           # Session destruction and redirect
+├── busqueda.php         # Search interface with database integration and Google Maps
+├── perfil_usuario.php   # User profile with pet listings (requires auth)
+├── editar_perfil.php    # Profile editing functionality
+├── registro_usuario.php # User registration with file-based photo upload
+├── registro_mascota.php # Pet registration with file-based image storage
 ├── perfil_mascota.php   # Pet profile with GET parameter ?id=
+├── debug_mascotas.php   # Debug utility for troubleshooting database/session issues
 ├── nousuario.php        # Static pet profile page
+├── home2_02/            # Legacy search UI directory (integrated into main app)
+│   ├── busqueda.php     # Old search interface (replaced by main busqueda.php)
+│   └── styles.css       # Legacy search styles (moved to assets/css/busqueda.css)
 └── assets/              # Static assets organized by type
-    ├── css/
-    │   ├── mascota03.css           # Shared stylesheet for forms and profiles
-    │   ├── home.css                # Styles for main feed page
-    │   ├── iniciosesion.css        # Styles for login page
-    │   ├── nousuario.css           # Styles for pet profile display
-    │   ├── registro-mascota-addon.css # Additional styles for pet registration
-    │   └── registro-usuario.css    # Additional styles for user registration
+    ├── css/             # Stylesheets for different pages
+    │   ├── busqueda.css # Search page styles with carousel and map integration
+    │   └── ...          # Other stylesheets
     └── images/
-        ├── logo.png      # Application logo
-        └── image 27.png  # Login page logo
+        ├── mascotas/    # Pet photos stored as files (mascota_{userid}_{timestamp}.ext)
+        ├── usuarios/    # User profile photos (usuario_{userid}_{timestamp}.ext)
+        └── *.svg        # Placeholder icons for different animal types
 ```
 
 ## Development Environment
@@ -71,16 +76,21 @@ if(isset($_POST['btn_name'])){
 ```
 
 ### Image Handling
-- **Upload Method**: `$_FILES` with `file_get_contents()` to BLOB
-- **Storage**: Direct BLOB storage in database (not file system)
-- **Preview**: JavaScript for client-side image preview
+- **Upload Method**: `$_FILES` with `move_uploaded_file()` to file system
+- **Storage**: File-based storage in `assets/images/{mascotas|usuarios}/`
+- **Naming Pattern**: `{type}_{user_id}_{timestamp}.{extension}`
+- **Fallback**: Database still supports BLOB storage via `foto_url` field
+- **Preview**: JavaScript for client-side image preview before upload
 
 ## Key Implementation Details
 
 ### Authentication
-- **Current State**: Login form exists but no session management implemented
-- **Password Hashing**: Uses `password_hash()` in registration
-- **Missing**: Session handling, login verification, logout functionality
+- **Current State**: Full authentication system implemented with session management
+- **Login**: `iniciosesion.php` handles credential verification and session creation
+- **Sessions**: `$_SESSION['usuario_id']`, `$_SESSION['usuario_nombre']`, `$_SESSION['usuario_email']`
+- **Protection**: Pages like `perfil_usuario.php` check session and redirect to login if not authenticated
+- **Logout**: `logout.php` destroys session and redirects to login
+- **Password Hashing**: Uses `password_hash()` and `password_verify()` for secure authentication
 
 ### QR Code System
 - **Purpose**: Each pet gets a unique QR code for identification
@@ -88,18 +98,36 @@ if(isset($_POST['btn_name'])){
 - **Integration**: Links to `perfil_mascota.php?id={pet_id}`
 
 ### UI/UX Patterns
-- **Color Scheme**: Consistent `#FAF3B5` (light yellow) background
+- **Color Scheme**: Consistent #FAF3B5 (light yellow) background
 - **Mobile-First**: Max-width 430px containers
 - **Navigation**: Bottom navigation bar with SVG icons (placeholder alerts)
-- **Form Style**: Centered forms with rounded corners and purple accent `#c9a7f5`
+- **Form Style**: Centered forms with rounded corners and purple accent #c9a7f5
 
 ## Critical Workflows
 
 ### Adding New Pets
-1. User fills `registro_mascota.php` form
-2. Image processed as BLOB via `file_get_contents()`
-3. Data validated and inserted to `mascotas` table
+1. User fills `registro_mascota.php` form (requires authentication)
+2. Image processed via `move_uploaded_file()` to file system with unique naming
+3. Data validated and inserted to `mascotas` table with `foto_url` field pointing to file path
 4. QR code generated and linked
+
+### Search and Navigation Integration
+1. `busqueda.php` provides full-text search across pet database
+2. Search by name, species, breed, or color with real-time results
+3. Google Maps integration for location context
+4. Carousel navigation with smooth scrolling for pet cards
+5. Unified navigation bar across all main pages (home, search, profile)
+
+### User Profile Management
+1. `perfil_usuario.php` displays user info and their registered pets
+2. Session-protected with automatic redirect to login if not authenticated
+3. Queries pets using `id` foreign key to link with `usuarios` table
+4. `editar_perfil.php` allows updating user information and profile photo
+
+### Debugging Database Issues
+- Use `debug_mascotas.php` to troubleshoot session, database connection, and data retrieval issues
+- Shows session state, user verification, table structure, and query results
+- Helpful for diagnosing foreign key relationships and data inconsistencies
 
 ### Database Setup
 ```sql
@@ -114,11 +142,10 @@ mysql -u root mascotas_db < mascotas.sql
 
 ## Missing Implementations
 When extending this system, note these are placeholder/incomplete:
-- Session management and authentication flow
-- Actual search functionality (currently hardcoded data in `home.php`)
-- File-based image storage (currently BLOB only)
-- Navigation functionality (currently `alert()` placeholders)
+- Navigation functionality (currently `alert()` placeholders for Info and Settings)
 - Email integration for lost pet notifications
+- QR code generation and scanning functionality
+- Camera integration for search by photo feature
 
 ## Database Relationships
 ```

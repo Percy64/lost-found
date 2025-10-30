@@ -359,6 +359,130 @@
         color: #333;
     }
 
+    /* Sección de Código QR */
+    .qr-section {
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        text-align: center;
+    }
+
+    .qr-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .qr-image-container {
+        padding: 1rem;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .qr-image {
+        max-width: 250px;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .qr-info {
+        text-align: center;
+        max-width: 400px;
+    }
+
+    .qr-description {
+        margin: 1rem 0;
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .qr-actions {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+    }
+
+    .btn-qr-download, .btn-qr-print, .btn-qr-share, .btn-generate-qr {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: background-color 0.2s ease;
+    }
+
+    .btn-qr-download:hover { background-color: #0056b3; }
+    .btn-qr-print { background-color: #28a745; }
+    .btn-qr-print:hover { background-color: #1e7e34; }
+    .btn-qr-share { background-color: #ffc107; color: #000; }
+    .btn-qr-share:hover { background-color: #e0a800; }
+    .btn-generate-qr { background-color: #6f42c1; }
+    .btn-generate-qr:hover { background-color: #5a359a; }
+
+    .qr-url {
+        margin: 1rem 0;
+        padding: 0.5rem;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        word-break: break-all;
+    }
+
+    .qr-placeholder {
+        padding: 2rem;
+        text-align: center;
+        color: #666;
+    }
+
+    .qr-placeholder-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    /* Navegación */
+    .navigation {
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem 0;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 1rem;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: background-color 0.2s ease;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-btn:hover {
+        background-color: rgba(201, 167, 245, 0.1);
+    }
+
+    .nav-btn svg {
+        width: 24px;
+        height: 24px;
+        stroke: #666;
+        stroke-width: 2;
+    }
+
     /* Responsive para perfil */
     @media (max-width: 480px) {
         .imagen-mascota, .placeholder-foto {
@@ -377,5 +501,31 @@
 
         .btn-accion {
             max-width: none;
+        }
+
+        .navigation {
+            padding: 0.5rem 0;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .qr-actions {
+            flex-direction: column;
+        }
+
+        .qr-image {
+            max-width: 200px;
+        }
+
+        .qr-section {
+            padding: 1rem;
         }
     }

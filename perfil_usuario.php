@@ -29,16 +29,25 @@ try {
 $mascotas = [];
 $debug_sql = '';
 try {
-    // Corregido: la columna de fecha en la tabla es 'fecha_registro' (no 'fecha_creacion')
+    // La consulta está correcta: usar 'id' que es la FK en la tabla mascotas que referencia usuarios.id
     $sql_mascotas = "SELECT * FROM mascotas WHERE id = ? ORDER BY fecha_registro DESC";
     $debug_sql = "SQL: " . $sql_mascotas . " con parametro: " . $usuario_id;
     $stmt_mascotas = $pdo->prepare($sql_mascotas);
     $stmt_mascotas->execute([$usuario_id]);
     $mascotas = $stmt_mascotas->fetchAll(PDO::FETCH_ASSOC);
+    
 } catch(PDOException $e) {
     $mascotas = [];
     $debug_error = "Error al obtener mascotas: " . $e->getMessage();
     error_log($debug_error);
+    // Mostrar error temporal para debug
+    if (isset($_GET['debug'])) {
+        echo "<div style='color: red; margin: 10px; padding: 10px; border: 1px solid red;'>";
+        echo "Error SQL: " . htmlspecialchars($e->getMessage()) . "<br>";
+        echo "SQL ejecutado: " . htmlspecialchars($sql_mascotas) . "<br>";
+        echo "Parámetro: " . $usuario_id;
+        echo "</div>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -108,7 +117,23 @@ try {
                     <button onclick="window.location.href='registro_mascota.php'" class="btn-add-pet">➕ Agregar</button>
                 </div>
 
-                
+                <!-- Debug temporal -->
+                <?php if (isset($_GET['debug'])): ?>
+                    <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; font-size: 12px;">
+                        <strong>Debug Info:</strong><br>
+                        Usuario ID: <?= $usuario_id ?><br>
+                        SQL: <?= htmlspecialchars($debug_sql) ?><br>
+                        Número de mascotas encontradas: <?= count($mascotas) ?><br>
+                        <?php if (!empty($mascotas)): ?>
+                            Mascotas: 
+                            <ul>
+                                <?php foreach($mascotas as $m): ?>
+                                    <li><?= htmlspecialchars($m['nombre']) ?> (ID: <?= $m['id_mascota'] ?>)</li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
 
                 <?php if (empty($mascotas)): ?>
                     <div class="no-pets">
@@ -174,7 +199,7 @@ try {
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
         </button>
-        <button class="nav-btn" onclick="alert('Buscar')">
+        <button class="nav-btn" onclick="window.location.href='busqueda.php'">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
